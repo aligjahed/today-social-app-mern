@@ -1,9 +1,17 @@
-import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home, Login, Register, Posts, Profile, NotFound } from "./views/views";
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+};
 
-export default App
+export default App;

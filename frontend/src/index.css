@@ -1,13 +1,31 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Rubik";
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  .logo {
+    font-family: "Rubik Mono One";
+  }
+
+  .button {
+    @apply px-[24px] py-[8px] rounded-[8px];
+  }
+
+  .buttonTransition {
+    @apply transition-transform ease-in-out duration-200 hover:scale-[1.1];
+  }
+
+  .mobileMenuSpan {
+    @apply bg-black w-[20px] h-[3px];
+  }
+
+  .navButtons {
+    @apply cursor-pointer;
+  }
 }
