@@ -21,11 +21,19 @@
     @apply transition-transform ease-in-out duration-200 hover:scale-[1.1];
   }
 
+  .mobileMenuIcon {
+    @apply w-[20px] h-[18px] space-y-[4px] lg:hidden hover:cursor-pointer;
+  }
+
   .mobileMenuSpan {
-    @apply bg-black w-[20px] h-[3px];
+    @apply bg-black w-full h-full max-h-[3px];
   }
 
   .navButtons {
     @apply cursor-pointer;
+  }
+
+  .mobileMenu {
+    @apply absolute top-[60px] left-0 flex items-center h-[91%] w-full p-[30px] bg-transparent_black;
   }
 }
