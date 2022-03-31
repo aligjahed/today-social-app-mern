@@ -12,6 +12,16 @@ const login = async (user) => {
   return response.data;
 };
 
-const services = { login };
+const register = async (user) => {
+  const response = await axios.post(API_URL + "register", user);
+
+  if (response) {
+    localStorage.setItem("user", JSON.stringify(response.data));
+  }
+
+  return response.data;
+};
+
+const services = { login, register };
 
 export default services;

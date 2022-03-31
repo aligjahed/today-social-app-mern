@@ -6,6 +6,7 @@ const postModel = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    name: { type: String, required: true },
     postPic: {
       type: String,
       required: [true, "Please select an image"],

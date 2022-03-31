@@ -5,10 +5,16 @@ const asyncHandler = require("express-async-handler");
 // @route POST /api/posts/create
 // @access Private
 const createPost = asyncHandler(async (req, res) => {
-  const { postTitle, postDesc, postPic } = req.body;
+  const { postTitle, postDesc, postPic, name } = req.body;
+
+  if (!postTitle || !postPic) {
+    res.status(400);
+    throw new Error("Please fill all required fields");
+  }
 
   const newPost = await Post.create({
     user: req.user.id,
+    name: name,
     postPic: postPic,
     postTitle: postTitle,
     postDesc: postDesc,

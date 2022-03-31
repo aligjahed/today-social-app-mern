@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MobileMenu } from "./components";
+import { useSelector } from "react-redux";
+import { FaPlus } from "react-icons/fa";
+import profilePlaceHolde from "../assets/images/profile-picture-placeholder.png";
 
 const Header = () => {
   const [currentPage, setCurrentPage] = useState("home");
   const [isOpen, setIsOpen] = useState(false);
+  const [profilePic, setProfilePic] = useState();
 
   const navigate = useNavigate();
+
+  // Importing user from redux state
+  const { user } = useSelector((state) => state.auth);
+
+  // Convert user to json
+  const currentUser = JSON.parse(user);
 
   const changePage = (e) => {
     if (e.target.id !== currentPage && e.target.id !== "home") {
@@ -17,6 +27,10 @@ const Header = () => {
       navigate("/");
     }
   };
+
+  useEffect(() => {
+    user && setProfilePic(currentUser.profilePic);
+  }, [user]);
 
   return (
     <header className="flex justify-between items-center px-[18px] py-[18px] lg:px-[80px] lg:py-[40px] shadow-lg z-10">
@@ -67,7 +81,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <div className="hidden lg:flex space-x-[25px] ">
+      <div className={user ? "hidden" : "hidden lg:flex space-x-[25px] "}>
         <button
           className="bg-main_blue text-white  button buttonTransition"
           id="login"
@@ -81,6 +95,31 @@ const Header = () => {
           onClick={changePage}
         >
           Sign up
+        </button>
+      </div>
+      <div className={user ? "hidden lg:flex items-center" : "hidden"}>
+        <p className="font-normal text-slate-400 text-[18px]">How's your day</p>
+        <h2 className="text-main_blue font-bold text-[24px] ml-[5px] ">
+          {user && currentUser.name}
+        </h2>
+        <img
+          src={
+            !profilePic
+              ? profilePlaceHolde
+              : `data:image/jpeg;base64,${profilePic}`
+          }
+          className="w-[35px] border-[3px] border-main_blue rounded-[50%] ml-[10px] cursor-pointer"
+          alt="profile picture placeholder"
+        />
+        <button
+          className="flex items-center bg-main_blue text-white px-[12px] py-[10px] rounded-[6px] text-[12px] ml-[10px]"
+          onClick={() => {
+            setCurrentPage("newpost");
+            navigate("/newpost");
+          }}
+        >
+          <FaPlus />
+          Add new post
         </button>
       </div>
       <div className="mobileMenuIcon" onClick={() => setIsOpen(!isOpen)}>

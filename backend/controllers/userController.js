@@ -39,14 +39,16 @@ const registerUser = asyncHandler(async (req, res) => {
     username: username,
     email: email,
     password: hashedPassword,
-    profilePic: profilePic,
+    profilePic: null,
   };
 
   const newUser = await User.create(user);
+
   res.status(200).json({
     _id: newUser.id,
     name: newUser.name,
     email: newUser.email,
+    profilePic: newUser.profilePic,
     token: generateToken(newUser.id),
   });
 });
@@ -86,8 +88,12 @@ const loginUser = asyncHandler(async (req, res) => {
         _id: userByEmail.id,
         name: userByEmail.name,
         email: userByEmail.email,
+        profilePic: userByEmail.profilePic,
         token: generateToken(userByEmail.id),
       });
+    } else {
+      res.status(401);
+      throw new Error("Please check your inputs again");
     }
   }
 
@@ -102,6 +108,7 @@ const loginUser = asyncHandler(async (req, res) => {
         _id: userByUsername.id,
         name: userByUsername.name,
         email: userByUsername.email,
+        profilePic: userByUsername.profilePic,
         token: generateToken(userByUsername.id),
       });
     }

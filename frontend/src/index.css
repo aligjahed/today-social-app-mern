@@ -36,4 +36,8 @@
   .mobileMenu {
     @apply absolute top-[60px] left-0 flex items-center h-[91%] w-full p-[30px] bg-transparent_black;
   }
+
+  .label {
+    @apply first:mt-0 mt-[25px] text-[18px] font-bold mb-[10px];
+  }
 }

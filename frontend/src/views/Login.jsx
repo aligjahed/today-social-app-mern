@@ -72,7 +72,7 @@ const Login = () => {
     if (user) {
       navigate("/posts");
     }
-  }, [isLoading, isError, message, isSuccess, newPage]);
+  }, [isLoading, isError, message, isSuccess, newPage, user, navigate]);
 
   return (
     <div className="flex justify-between">
